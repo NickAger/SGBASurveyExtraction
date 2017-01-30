@@ -4,24 +4,24 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 import qualified Data.Text as T
-import System.Environment as Env
-import Data.Csv
+import qualified System.Environment as Env
+import Data.Csv as Csv
 import qualified Data.Vector as V
-import qualified Data.ByteString.Lazy as BL
+import qualified Data.ByteString as BL
 import GHC.Generics
 
 data SurveyFields = SurveyFields { contactDetails :: !T.Text, age :: !T.Text, membershipLength :: !T.Text, assistantInstructor :: !T.Text , otherInstuctor :: !T.Text , instructorText :: !T.Text }
   deriving (Generic, Show)
 
-instance ToNamedRecord SurveyFields
-instance DefaultOrdered SurveyFields
+instance Csv.ToNamedRecord SurveyFields
+instance Csv.DefaultOrdered SurveyFields
 
-instance FromRecord SurveyFields where
+instance Csv.FromRecord SurveyFields where
     parseRecord v = SurveyFields <$> v .! 104 <*> v .! 16 <*> v .! 15 <*> v .! 36 <*> v .! 38 <*> v .! 39
 
 readCSVLines filePath = do
   csvData <- BL.readFile filePath
-  case decode HasHeader csvData  :: Either String (V.Vector SurveyFields) of
+  case Csv.decode Csv.HasHeader csvData  :: Either String (V.Vector SurveyFields) of
           Left err -> do
             putStrLn err
             return V.empty
@@ -36,4 +36,4 @@ main = do
 
   csvLines <- readCSVLines filePath
   let filteredLines = filter filterBlankSurveyLine $ V.toList csvLines
-  BL.putStr $ encodeDefaultOrderedByName filteredLines
+  BL.putStr $ Csv.encodeDefaultOrderedByName filteredLines
