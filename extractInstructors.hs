@@ -11,7 +11,7 @@ import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
 import GHC.Generics
 
-data SurveyFields = SurveyFields { contactDetails :: !T.Text, age :: !T.Text, membershipLength :: !T.Text, assistantInstructor :: !T.Text , otherInstuctor :: !T.Text , instructorText :: !T.Text }
+data SurveyFields = SurveyFields { contactDetails :: T.Text, age :: T.Text, membershipLength :: T.Text, assistantInstructor :: T.Text , otherInstuctor :: T.Text , instructorText :: T.Text }
   deriving (Generic, Show)
 
 instance Csv.ToNamedRecord SurveyFields
