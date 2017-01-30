@@ -5,9 +5,10 @@
 
 import qualified Data.Text as T
 import qualified System.Environment as Env
-import Data.Csv as Csv
+import qualified Data.Csv as Csv
+import Data.Csv ((.!))
 import qualified Data.Vector as V
-import qualified Data.ByteString as BL
+import qualified Data.ByteString.Lazy as BL
 import GHC.Generics
 
 data SurveyFields = SurveyFields { contactDetails :: !T.Text, age :: !T.Text, membershipLength :: !T.Text, assistantInstructor :: !T.Text , otherInstuctor :: !T.Text , instructorText :: !T.Text }
