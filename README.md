@@ -24,11 +24,11 @@ I asked on IRC #haskell:
 
 the result:
 
-> <lyxia>	nickager: you can see that the ByteString type in the signature links to ByteString.Lazy
+> lyxia: you can see that the ByteString type in the signature links to ByteString.Lazy
 >
-> <lyxia>	nickager: a lazy bytestring doesn't need to be in memory all at once to be consumed.
+> lyxia: a lazy bytestring doesn't need to be in memory all at once to be consumed.
 >
-> <nickager>	lyxia: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
+> nickager: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
 >
-> <lyxia>	nickager: efficiently meaning it doesn't hold the whole bytestring in memory at once
+> lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
