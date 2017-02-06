@@ -1,5 +1,37 @@
 # SGBASurveyExtraction
 
+* People who are interested in junior sailing
+* People who are senior/assistant instructor.
+* People who have PB2, Safety boat or who are interested in gain it.
+
+*Empowerment*, *enablement* - that what we should be aiming to do
+
+Qualifications people have
+Qualifications people want
+
+Group free Text
+ - priority
+ - urgency
+ - cost
+
+* Demand for facilities eg is there more demand dinghy storage.
+
+* Page 1 - is it representative of the membership.
+* Page 1 might be necessary to weight response say for families who ask for something might be useful
+* Page 1 - relate locker, boat park to demand
+
+* How representative it is terms of length of membership
+
+* Page 2 - Extract who are most experienced are.
+
+## How do you use the club:
+* demand for activies
+* are we matching facilities to demand.
+* Club facilities cross-tab to relate answers to demographics
+
+
+## Technical
+
 See:
 
 * https://www.stackbuilders.com/tutorials/haskell/csv-encoding-decoding/
