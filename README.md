@@ -63,3 +63,16 @@ the result:
 > nickager: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
+
+```haskell
+import Sudoku
+import Control.Exception
+import System.Environment
+import Data.Maybe
+
+main :: IO ()
+main = do
+    [f] <- getArgs
+    grids <- fmap lines $ readFile f
+    print (length (filter isJust (map solve grids)))
+```
