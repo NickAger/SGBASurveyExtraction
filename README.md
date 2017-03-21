@@ -63,17 +63,3 @@ the result:
 > nickager: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
-
-```javascript
-function getConfigFiles(callback) {
-  function extractConfigFiles(filess) { ... }
-
-  fs.readdir(".", function(hereErr, here) {
-    fs.readdir(process.env.HOME, function(homeErr, home) {
-      fs.readdir("/etc", function(etcErr, etc) {
-        callback(extractConfigFiles([here, home, etc]));
-      })
-    })
-  });
-}
-```
