@@ -64,3 +64,12 @@ the result:
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
+```haskell
+getConfigFiles = do
+    here <- readdir "."
+    home <- readdir homedir
+    etc  <- readdir "/etc"
+    return $ extractConfigFiles [here, home, etc]
+  where
+    extractConfigFiles = ...
+```
