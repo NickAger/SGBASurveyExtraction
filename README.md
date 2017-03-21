@@ -64,3 +64,21 @@ the result:
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
+```haskell
+type Name        = String
+type PhoneNumber = String
+type PhoneBook   = Map Name PhoneNumber
+
+newtype PhoneBookState = PhoneBookState (MVar PhoneBook)
+
+insert :: PhoneBookState -> Name -> PhoneNumber -> IO ()
+insert (PhoneBookState m) name number = do
+  book <- takeMVar m
+  putMVar m (Map.insert name number book)
+  
+lookup :: PhoneBookState -> Name -> IO (Maybe PhoneNumber)
+lookup (PhoneBookState m) name = do
+  book <- readMVar m
+  return (Map.lookup name book)
+```
+
