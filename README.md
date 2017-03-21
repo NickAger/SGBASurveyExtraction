@@ -63,25 +63,3 @@ the result:
 > nickager: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
-
-```haskell
-import Sudoku
-import Control.Exception
-import System.Environment
-import Data.Maybe
-import Control.Monad.Par
-import Control.DeepSeq
-
-main :: IO ()
-main = do
-    [f,n] <- getArgs
-    grids <- fmap lines $ readFile f
-    print (length (filter isJust (runPar $ parMapChunk (read n) solve grids)))
-
-parMapChunk :: NFData b => Int -> (a -> b) -> [a] -> Par [b]
-parMapChunk n f xs = fmap concat $ parMap (map f) (chunk n xs)
-
-chunk :: Int -> [a] -> [[a]]
-chunk _ [] = []
-chunk n xs = as : chunk n bs where (as,bs) = splitAt n xs
-```
