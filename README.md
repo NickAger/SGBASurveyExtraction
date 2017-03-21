@@ -63,3 +63,11 @@ the result:
 > nickager: so `decode` producing a non-lazy result, but does so efficiently using a lazy bytestring?
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
+
+```haskell
+import Control.Concurrent
+
+main = do
+  m <- newEmptyMVar
+  takeMVar m
+```
