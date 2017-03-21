@@ -68,11 +68,8 @@ the result:
 main = print pair
  where
   pair =
--- <<pair
    (fib 35, fib 36) `using` parPair
--- >>
 
--- <<parPair
 parPair :: Strategy (a,b)
 parPair (a,b) = do
   a' <- rpar a
