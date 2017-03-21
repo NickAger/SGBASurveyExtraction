@@ -64,3 +64,18 @@ the result:
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
+```haskell
+main = print pair
+ where
+  pair =
+-- <<pair
+   (fib 35, fib 36) `using` parPair
+-- >>
+
+-- <<parPair
+parPair :: Strategy (a,b)
+parPair (a,b) = do
+  a' <- rpar a
+  b' <- rpar b
+  return (a',b')
+```
