@@ -64,33 +64,3 @@ the result:
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
-```haskell
-type Stream a = MVar (Item a)
-data Item a   = Item a (Stream a)
-
-data Chan a
- = Chan (MVar (Stream a))
-        (MVar (Stream a))
-
-newChan :: IO (Chan a)
-newChan = do
-  hole  <- newEmptyMVar
-  readVar  <- newMVar hole
-  writeVar <- newMVar hole
-  return (Chan readVar writeVar)
-
-writeChan :: Chan a -> a -> IO ()
-writeChan (Chan _ writeVar) val = do
-  newHole <- newEmptyMVar
-  oldHole <- takeMVar writeVar
-  putMVar oldHole (Item val newHole)
-  putMVar writeVar newHole
-
-readChan :: Chan a -> IO a
-readChan (Chan readVar _) = do
-  stream <- takeMVar readVar  
-  Item val tail <- takeMVar stream 
-  putMVar readVar tail      
-  return val
-```
-
