@@ -64,3 +64,10 @@ the result:
 >
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
+```haskell
+main = do
+  lock <- newEmptyMVar
+  complete <- newEmptyMVar
+  forkIO $ takeMVar lock `finally` putMVar complete ()
+  takeMVar complete
+```
