@@ -65,14 +65,21 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-main = print pair
- where
-  pair =
-   (fib 35, fib 36) `using` parPair
+mport Sudoku
+import Control.Exception
+import System.Environment
+import Control.Parallel.Strategies
+import Data.Maybe
 
-parPair :: Strategy (a,b)
-parPair (a,b) = do
-  a' <- rpar a
-  b' <- rpar b
-  return (a',b')
+main :: IO ()
+main = do
+  [f] <- getArgs
+  file <- readFile f
+
+  let puzzles   = lines file
+-- <<solutions
+  let solutions = map solve puzzles `using` parList rseq
+-- >>
+
+  print (length (filter isJust solutions))
 ```
