@@ -65,7 +65,7 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-mport Sudoku
+import Sudoku
 import Control.Exception
 import System.Environment
 import Control.Parallel.Strategies
