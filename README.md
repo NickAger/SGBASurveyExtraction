@@ -67,7 +67,8 @@ the result:
 ```haskell
 runEval $ do
    a <- rpar (f x)
-   b <- rseq (f y)
+   b <- rpar (f y)
    rseq a
+   rseq b
    return (a,b)
 ```
