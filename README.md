@@ -65,21 +65,12 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-import Sudoku
-import Control.Exception
-import System.Environment
-import Control.Parallel.Strategies
-import Data.Maybe
-
-main :: IO ()
-main = do
-  [f] <- getArgs
-  file <- readFile f
-
-  let puzzles   = lines file
--- <<solutions
-  let solutions = map solve puzzles `using` parList rseq
--- >>
-
-  print (length (filter isJust solutions))
+test n m = runPar $ do
+  i <- new                          
+  j <- new                          
+  fork (put i (fib n))              
+  fork (put j (fib m))              
+  a <- get i                        
+  b <- get j                        
+  return (a+b)
 ```
