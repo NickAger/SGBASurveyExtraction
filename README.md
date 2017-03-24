@@ -65,10 +65,11 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-runEval $ do
-   a <- rpar (f x)
-   b <- rpar (f y)
-   rseq a
-   rseq b
-   return (a,b)
+data Eval a
+instance Monad Eval
+
+runEval :: Eval a -> a
+
+rpar :: a -> Eval a
+rseq :: a -> Eval a
 ```
