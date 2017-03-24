@@ -65,10 +65,10 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-runPar $ do
-     fx <- spawnP (f x)  -- start evaluating (f x)
-     gx <- spawnP (g x)  -- start evaluating (g x)
-     a  <- get fx        -- wait for fx
-     b  <- get gx        -- wait for gx
-     return (a,b)        -- return results
+test n m = runPar $ do
+     fn <- spawnP (fib n) 
+     fm <- spawnP (fib m)
+     a  <- get fn        
+     b  <- get fm        
+     return (a,b)
 ```
