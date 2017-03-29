@@ -65,10 +65,16 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-main = do
-    a1 <- async (getURL "http://www.wikipedia.org/wiki/Shovel")
-    a2 <- async (getURL "http://www.wikipedia.org/wiki/Spade")
-    r1 <- wait a1
-    r2 <- wait a2
-    print (B.length page1, B.length r2)
+data STM a -- abstract
+instance Monad STM -- among other things
+
+atomically :: STM a -> IO a
+
+data TVar a -- abstract
+newTVar   :: a -> STM (TVar a)
+readTVar  :: TVar a -> STM a
+writeTVar :: TVar a -> a -> STM ()
+
+retry     :: STM a
+orElse    :: STM a -> STM a -> STM a
 ```
