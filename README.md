@@ -65,13 +65,10 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-import Control.Concurrent
-import Control.Monad
-import System.IO
+type Account = TVar Int
 
-main = do
-  hSetBuffering stdout NoBuffering
-             
-  forkIO (replicateM_ 100000 (putChar 'A')) 
-  replicateM_ 100000 (putChar 'B') 
+withdraw :: Account -> Int -> STM ()
+withdraw acc amount = do
+    bal <- readTVar acc
+    writeTVar acc (bal - amount)
 ```
