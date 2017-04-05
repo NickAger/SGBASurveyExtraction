@@ -65,19 +65,13 @@ the result:
 > lyxia: efficiently meaning it doesn't hold the whole bytestring in memory at once
 
 ```haskell
-data TMVar a -- abstract
+import Control.Concurrent
+import Control.Monad
+import System.IO
 
-newTMVar :: a -> STM (TMVar a)
-newEmptyTMVar :: STM (TMVar a)
-newTMVarIO :: a -> IO (TMVar a)
-newEmptyTMVarIO :: IO (TMVar a)
-
-takeTMVar :: TMVar a -> STM a
-putTMVar :: TMVar a -> a -> STM ()
-readTMVar :: TMVar a -> STM a
-tryReadTMVar :: TMVar a -> STM (Maybe a)
-swapTMVar :: TMVar a -> a -> STM a
-tryTakeTMVar :: TMVar a -> STM (Maybe a)
-tryPutTMVar :: TMVar a -> a -> STM Bool
-isEmptyTMVar :: TMVar a -> STM Bool
+main = do
+  hSetBuffering stdout NoBuffering
+             
+  forkIO (replicateM_ 100000 (putChar 'A')) 
+  replicateM_ 100000 (putChar 'B') 
 ```
